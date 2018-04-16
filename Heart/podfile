@@ -1,0 +1,13 @@
+platform :ios, ’9.0’
+
+use_frameworks!
+
+target 'Heart’ do
+
+  pod 'YTKNetwork'
+  pod 'lottie-ios'
+  pod 'LeanCloud'
+  pod 'HandyJSON', '~> 4.1.1'
+  pod 'StreamingKit'
+
+end
