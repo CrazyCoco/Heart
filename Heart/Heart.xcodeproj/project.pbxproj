@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C0AA18A209AE83F00AFE886 /* MusicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0AA189209AE83F00AFE886 /* MusicAPI.swift */; };
+		3C0AA190209B08A200AFE886 /* MusicPlayListDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0AA18F209B08A200AFE886 /* MusicPlayListDetailModel.swift */; };
 		3C3E6AC3207E118A00686E53 /* YRJStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C3E6AC2207E118A00686E53 /* YRJStoryboard.storyboard */; };
 		3C3E6AC8207E121800686E53 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3E6AC7207E121800686E53 /* BaseViewController.swift */; };
 		3C3E6ACC207E125400686E53 /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3E6ACB207E125400686E53 /* IndexViewController.swift */; };
@@ -37,10 +39,14 @@
 		3C9C20CB207F005100059DEC /* MusicPlayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9C20CA207F005100059DEC /* MusicPlayCollectionViewCell.swift */; };
 		3C9C20CD207F013400059DEC /* MusicPlayLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9C20CC207F013400059DEC /* MusicPlayLayout.swift */; };
 		3CC23CB5207F6B0C005DBE40 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 3CC23CB4207F6B0C005DBE40 /* loading.json */; };
+		3CF47A6D2099953500F3EA0D /* SearchMusicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF47A6C2099953500F3EA0D /* SearchMusicModel.swift */; };
+		3CFAD4E120A57057004B6E8C /* MusicListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFAD4E020A57057004B6E8C /* MusicListTableViewCell.swift */; };
 		F94B0EC9F9398C809BB7E721 /* Pods_Heart.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF09E80750EC2D94D5849ADE /* Pods_Heart.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C0AA189209AE83F00AFE886 /* MusicAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicAPI.swift; sourceTree = "<group>"; };
+		3C0AA18F209B08A200AFE886 /* MusicPlayListDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayListDetailModel.swift; sourceTree = "<group>"; };
 		3C3E6AC2207E118A00686E53 /* YRJStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = YRJStoryboard.storyboard; sourceTree = "<group>"; };
 		3C3E6AC7207E121800686E53 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		3C3E6ACB207E125400686E53 /* IndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +79,8 @@
 		3C9C20CA207F005100059DEC /* MusicPlayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayCollectionViewCell.swift; sourceTree = "<group>"; };
 		3C9C20CC207F013400059DEC /* MusicPlayLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayLayout.swift; sourceTree = "<group>"; };
 		3CC23CB4207F6B0C005DBE40 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		3CF47A6C2099953500F3EA0D /* SearchMusicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMusicModel.swift; sourceTree = "<group>"; };
+		3CFAD4E020A57057004B6E8C /* MusicListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicListTableViewCell.swift; sourceTree = "<group>"; };
 		46EAF789921B45D98317E390 /* Pods-Heart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heart.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Heart/Pods-Heart.debug.xcconfig"; sourceTree = "<group>"; };
 		BF09E80750EC2D94D5849ADE /* Pods_Heart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Heart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E54906DCC659FC58CA40E9F5 /* Pods-Heart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Heart.release.xcconfig"; path = "Pods/Target Support Files/Pods-Heart/Pods-Heart.release.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +101,8 @@
 		3C3E6ABF207E117B00686E53 /* Music */ = {
 			isa = PBXGroup;
 			children = (
+				3CF47A6B2099951600F3EA0D /* Model */,
+				3CF47A66209991F200F3EA0D /* API */,
 				3C9C20C7207EF9E000059DEC /* View */,
 				3C9C20C4207EF9E000059DEC /* ViewController */,
 			);
@@ -219,6 +229,7 @@
 			children = (
 				3C9C20CA207F005100059DEC /* MusicPlayCollectionViewCell.swift */,
 				3C9C20CC207F013400059DEC /* MusicPlayLayout.swift */,
+				3CFAD4E020A57057004B6E8C /* MusicListTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -246,6 +257,23 @@
 				3CC23CB4207F6B0C005DBE40 /* loading.json */,
 			);
 			path = "动画Json";
+			sourceTree = "<group>";
+		};
+		3CF47A66209991F200F3EA0D /* API */ = {
+			isa = PBXGroup;
+			children = (
+				3C0AA189209AE83F00AFE886 /* MusicAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		3CF47A6B2099951600F3EA0D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3CF47A6C2099953500F3EA0D /* SearchMusicModel.swift */,
+				3C0AA18F209B08A200AFE886 /* MusicPlayListDetailModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		49D840AF49D90F104BAAA809 /* Pods */ = {
@@ -292,6 +320,11 @@
 					3C92C5CF207DEC5F009FFDF9 = {
 						CreatedOnToolsVersion = 9.3;
 						LastSwiftMigration = 0930;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -354,28 +387,26 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Heart/Pods-Heart-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/FileKit/FileKit.framework",
 				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/LeanCloud/LeanCloud.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/StreamingKit/StreamingKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyUserDefaults/SwiftyUserDefaults.framework",
-				"${BUILT_PRODUCTS_DIR}/YTKNetwork/YTKNetwork.framework",
 				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FileKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LeanCloud.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StreamingKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyUserDefaults.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YTKNetwork.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,15 +432,19 @@
 				3C3E6AC8207E121800686E53 /* BaseViewController.swift in Sources */,
 				3C3E6AE6207E12C500686E53 /* ColorExtension.swift in Sources */,
 				3C3E6AEC207E12C500686E53 /* UINavigationBarExtension.swift in Sources */,
+				3CFAD4E120A57057004B6E8C /* MusicListTableViewCell.swift in Sources */,
 				3C9C20C1207EF95700059DEC /* YRJKit.swift in Sources */,
+				3C0AA190209B08A200AFE886 /* MusicPlayListDetailModel.swift in Sources */,
 				3C3E6AEA207E12C500686E53 /* DictionaryExtension.swift in Sources */,
 				3C3E6AE3207E12C500686E53 /* UITextFieldExtension.swift in Sources */,
 				3C3E6AE5207E12C500686E53 /* UIBarButtonItemExtension.swift in Sources */,
+				3CF47A6D2099953500F3EA0D /* SearchMusicModel.swift in Sources */,
 				3C9C20CB207F005100059DEC /* MusicPlayCollectionViewCell.swift in Sources */,
 				3C9C20C8207EF9E000059DEC /* MusicPlayViewController.swift in Sources */,
 				3C3E6AE4207E12C500686E53 /* UIViewExtension.swift in Sources */,
 				3C3E6AEB207E12C500686E53 /* UIImageExtension.swift in Sources */,
 				3C3E6AE2207E12C500686E53 /* ArrayExtension.swift in Sources */,
+				3C0AA18A209AE83F00AFE886 /* MusicAPI.swift in Sources */,
 				3C9C20C9207EF9E000059DEC /* MusicListViewController.swift in Sources */,
 				3C3E6ACC207E125400686E53 /* IndexViewController.swift in Sources */,
 				3C3E6ADF207E12C500686E53 /* UIAlertControllerExtension.swift in Sources */,
@@ -565,7 +600,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YS6MWP5X24;
 				INFOPLIST_FILE = Heart/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = yurenjie.com.cn.Heart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -584,7 +622,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YS6MWP5X24;
 				INFOPLIST_FILE = Heart/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = yurenjie.com.cn.Heart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";

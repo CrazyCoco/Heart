@@ -8,9 +8,9 @@
 
 import UIKit
 
-import LeanCloud
 import StreamingKit
 import AVFoundation
+import MediaPlayer
 
 
 class MusicPlayViewController: BaseViewController {
@@ -47,7 +47,8 @@ class MusicPlayViewController: BaseViewController {
     
     private var currentIndex = 0
     
-    var musicList = [LCObject]()
+    var playListModel : MusicPlayListDetailModel!
+    var musicList = [Tracks]()
     
     //音频播放器
     var audioPlayer: STKAudioPlayer!
@@ -67,6 +68,15 @@ class MusicPlayViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        self.progressSlider.isUserInteractionEnabled = false
+        
+        
+        //1.告诉系统接受远程响应事件，并注册成为第一响应者
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        self.becomeFirstResponder()
+        
+
         
         self.view.layoutIfNeeded()
         self.initUI()
@@ -122,9 +132,8 @@ class MusicPlayViewController: BaseViewController {
         
         audioPlayer.clearQueue()
         
-        let url = self.musicList[self.currentIndex].get("url")?.jsonString
-        audioPlayer.play(URL.init(string: url!)!)
-        
+        let url = "https://music.163.com/song/media/outer/url?id=" + "\(self.musicList[self.currentIndex].id)" + ".mp3"
+        audioPlayer.play(URL.init(string: url)!)
         
         
     }
@@ -139,7 +148,7 @@ class MusicPlayViewController: BaseViewController {
         }else{
             
             if self.currentIndex == self.musicList.count - 1{
-                
+            
                 self.currentIndex = 0
                 
             }else{
@@ -152,9 +161,9 @@ class MusicPlayViewController: BaseViewController {
         
         audioPlayer.clearQueue()
         
-        let url = self.musicList[self.currentIndex].get("url")?.jsonString
-        audioPlayer.play(URL.init(string: url!)!)
-        
+        let url = "https://music.163.com/song/media/outer/url?id=" + "\(self.musicList[self.currentIndex].id)" + ".mp3"
+        audioPlayer.play(URL.init(string: url)!)
+    
         
         
     }
@@ -162,9 +171,9 @@ class MusicPlayViewController: BaseViewController {
     //更新当前播放信息
     func updateNowPlayingInfoCenter() {
         
-        
-        self.singerNameLabel.text = "加载中..."
-        self.musicNameLabel.text = "加载中..."
+
+//        self.singerNameLabel.text = "加载中..."
+//        self.musicNameLabel.text = "加载中..."
         
         self.playTimeLabel!.text = "00:00"
         
@@ -193,45 +202,11 @@ class MusicPlayViewController: BaseViewController {
         let collectionIndexPath : IndexPath = NSIndexPath.init(item: self.currentIndex, section: 0) as IndexPath
         
         self.collectionView.scrollToItem(at: collectionIndexPath , at: .centeredHorizontally , animated: true)
+
+//        歌曲信息
+        self.musicNameLabel.text = self.musicList[self.currentIndex].name
+        self.singerNameLabel.text = self.musicList[self.currentIndex].artists[0].name;
         
-        
-        let url: URL = URL.init(string: (self.musicList[self.currentIndex].get("url")?.jsonString)!)!
-
-        let test: AVURLAsset = AVURLAsset.init(url: url)
-
-
-        for format in test.availableMetadataFormats {
-            for metadata: AVMetadataItem in test.metadata(forFormat: format) {
-
-                if metadata.commonKey == nil {
-                    return
-                }
-
-                if metadata.commonKey!.rawValue == "title" {
-                    print("歌曲名 \(String(describing: metadata.value))")
-                    
-                    self.musicNameLabel.text = metadata.value as! String
-                    
-                }
-
-                if metadata.commonKey!.rawValue == "artwork" {
-                    print("封面图片 \(String(describing: metadata.value))")
-                    
-                }
-
-                if metadata.commonKey!.rawValue == "albumName" {
-                    print("专辑名 \(String(describing: metadata.value))")
-                }
-
-                if metadata.commonKey!.rawValue == "artist" {
-                    print("歌手 \(String(describing: metadata.value))")
-                    self.singerNameLabel.text = metadata.value as! String
-                }
-
-            }
-        }
-    
-    
     }
     
     //停止播放
@@ -292,24 +267,42 @@ class MusicPlayViewController: BaseViewController {
             //更新进度条进度值
             self.progressSlider!.value = Float(audioPlayer.progress)
             
-            //一个小算法，来实现00：00这种格式的播放时间
-            let all:Int = Int(audioPlayer.progress)
-            let m:Int = all % 60
-            let f:Int = Int(all/60)
-            var time: String = ""
-            if f < 10{
-                time = "0\(f):"
-            }else {
-                time = "\(f)"
-            }
-            if m < 10{
-                time += "0\(m)"
-            }else {
-                time += "\(m)"
-            }
             //更新播放时间
-            self.playTimeLabel!.text = time
+            self.playTimeLabel!.text = returnTime(number: Int(audioPlayer.progress))
+            
+            
+            //大标题 - 小标题  - 歌曲总时长 - 歌曲当前播放时长 - 封面
+            let settings = [MPMediaItemPropertyTitle: self.musicList[self.currentIndex].name!,
+                            MPMediaItemPropertyArtist: self.musicList[self.currentIndex].artists[0].name!,
+                            MPMediaItemPropertyPlaybackDuration: audioPlayer.duration,
+                MPNowPlayingInfoPropertyElapsedPlaybackTime: audioPlayer.progress,
+                MPNowPlayingInfoPropertyPlaybackRate:1.0
+                ] as [String : Any]
+            
+            MPNowPlayingInfoCenter.default().setValue(settings, forKey: "nowPlayingInfo")
+            
         }
+    }
+    
+    func returnTime(number: Int) -> String {
+        
+        //一个小算法，来实现00：00这种格式的播放时间
+        let all:Int = number
+        let m:Int = all % 60
+        let f:Int = Int(all/60)
+        var time: String = ""
+        if f < 10{
+            time = "0\(f):"
+        }else {
+            time = "\(f)"
+        }
+        if m < 10{
+            time += "0\(m)"
+        }else {
+            time += "\(m)"
+        }
+        
+        return time
     }
     
     
@@ -339,6 +332,22 @@ class MusicPlayViewController: BaseViewController {
         }
     }
     
+
+    //列表按钮点击
+    @IBAction func listButtonClick(_ sender: UIButton) {
+     
+        let controller: MusicListViewController = UIStoryboard.init(name: "YRJStoryboard", bundle: nil).instantiateViewController(withIdentifier: "musiclist") as! MusicListViewController
+        controller.currentIndex = self.currentIndex
+        controller.musicList = self.musicList
+        controller.selectedMusicBlockClosure = {(index) in
+            self.currentIndex = index
+            self.playMusic()
+        }
+        self.present(controller, animated: true, completion: nil);
+        
+    }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -346,31 +355,55 @@ class MusicPlayViewController: BaseViewController {
     }
     
     
+    override func viewWillDisappear(_ animated: Bool) {
+        UIApplication.shared.endReceivingRemoteControlEvents()
+        self.resignFirstResponder()
+    }
+    
+    override var canBecomeFirstResponder: Bool{
+        return true
+    }
     
     
+
 }
 
 
 extension MusicPlayViewController : UICollectionViewDelegate,UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return musicList.count;
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MusicPlayCollectionViewCell", for: indexPath) as! MusicPlayCollectionViewCell
+        
         cell.imageView.backgroundColor = UIColor.randomColor
+        
+        let picUrl: URL = URL.init(string: (self.musicList[indexPath.row].album?.picUrl)!)!
+        
+        cell.imageView.sd_setImage(with: picUrl, completed: nil)
+        
         return cell
     }
     
 
     // 获取当前显示的cell的下标
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
         let point = self.view.convert(self.collectionView.center, to: self.collectionView)
+        
         let indexPath = self.collectionView.indexPathForItem(at: point)
         
         if self.currentIndex != indexPath?.row {
+            
             self.currentIndex = (indexPath?.row)!
+            
+            self.updateNowPlayingInfoCenter()
+            
             self.playMusic()
         }
     }
@@ -384,7 +417,6 @@ extension MusicPlayViewController: STKAudioPlayerDelegate {
     //开始播放歌曲
     func audioPlayer(_ audioPlayer: STKAudioPlayer,
                      didStartPlayingQueueItemId queueItemId: NSObject) {
-
     }
     
     //缓冲完毕
@@ -400,11 +432,13 @@ extension MusicPlayViewController: STKAudioPlayerDelegate {
         
         if state == .playing {
             self.playButton.isSelected = true
+            MPNowPlayingInfoCenter.default().playbackState = .playing
         }else{
             self.playButton.isSelected = false
+            MPNowPlayingInfoCenter.default().playbackState = .paused
         }
         
-        updateNowPlayingInfoCenter()
+        self.updateNowPlayingInfoCenter()
         
     }
     
@@ -439,7 +473,48 @@ extension MusicPlayViewController: STKAudioPlayerDelegate {
         resetAudioPlayer()
     }
     
-   
-    
 }
+
+
+
+// MARK: - 后台操作
+extension MusicPlayViewController {
+    override func remoteControlReceived(with event: UIEvent?) {
+        
+        if event?.type == UIEventType.remoteControl {
+            switch event!.subtype {
+            case .remoteControlTogglePlayPause:
+                print("暂停/播放")
+                //在暂停和继续两个状态间切换
+                if self.state == .paused {
+                    audioPlayer.resume()
+                }else{
+                    audioPlayer.pause()
+                }
+                
+            case .remoteControlPlay:  // play按钮
+                audioPlayer.resume()
+            case .remoteControlPause:  // pause按钮
+                audioPlayer.pause()
+                
+            case .remoteControlPreviousTrack: // ##  <-  ##
+                print("上一首")
+                if self.currentIndex > 0{
+                    self.currentIndex -= 1
+                    self.playMusic()
+                }
+                
+            case .remoteControlNextTrack: // ## -> ##
+                print("下一首")
+                playNext()
+            default:
+                break
+            }
+        }
+    }
+}
+
+
+
+
 

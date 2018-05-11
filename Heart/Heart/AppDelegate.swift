@@ -8,8 +8,9 @@
 
 import UIKit
 
-import LeanCloud
 import AVFoundation
+
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,8 +21,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        // applicationId 即 App Id，applicationKey 是 App Key
-        LeanCloud.initialize(applicationID: "yGf3EysE1ndRqcn1v19h6Cp1-gzGzoHsz", applicationKey: "RoREAyfqm9O7DOSV3KWna048")
+        // 注册后台播放
+        let session = AVAudioSession.sharedInstance()
+        do {
+            try session.setActive(true)
+            try session.setCategory(AVAudioSessionCategoryPlayback)
+        } catch {
+            print(error)
+        }
+        
+        
+        let controller = ViewController.init()
+        let nav: UINavigationController = UINavigationController.init(rootViewController: controller)
+        self.window?.rootViewController = nav
+        self.window?.makeKeyAndVisible()
         
         return true
     }

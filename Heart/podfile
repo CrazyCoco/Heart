@@ -5,22 +5,19 @@ use_frameworks!
 target 'Heart’ do
 
 #  网络库
-  pod 'YTKNetwork'
+  pod 'Moya'
 #  动画库
   pod 'lottie-ios'
-#  三方服务器
-  pod 'LeanCloud'
 #  模型
   pod 'HandyJSON', '~> 4.1.1'
 #  音乐播放
   pod 'StreamingKit'
 #  图片缓存
-  pod 'Kingfisher'
-#  随机框架
-#  pod 'RandomKit'
+  pod 'SDWebImage'
 #  用户数据储存
   pod 'SwiftyUserDefaults'
 #  文件管理
   pod 'FileKit'
+
 
 end
